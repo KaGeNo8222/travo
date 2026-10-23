@@ -1,0 +1,158 @@
+@import 'tailwindcss';
+
+/* Dark mode follows the `.dark` class on <html>, set from the theme preference. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Sukhumvit Set', 'Noto Sans Thai', 'Segoe UI',
+    'Leelawadee UI', system-ui, sans-serif;
+  --animate-slide-up: slide-up 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  --animate-fade-in: fade-in 180ms ease-out;
+  --animate-pop-in: pop-in 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  @keyframes slide-up {
+    from {
+      transform: translateY(24px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes pop-in {
+    from {
+      transform: scale(0.96);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+/* Semantic colour tokens; the values swap for dark mode below. */
+@theme inline {
+  --color-bg: var(--app-bg);
+  --color-surface: var(--app-surface);
+  --color-surface-2: var(--app-surface-2);
+  --color-fg: var(--app-fg);
+  --color-muted: var(--app-muted);
+  --color-subtle: var(--app-subtle);
+  --color-line: var(--app-line);
+  --color-primary: var(--app-primary);
+  --color-primary-fg: var(--app-primary-fg);
+  --color-primary-soft: var(--app-primary-soft);
+  --color-success: var(--app-success);
+  --color-success-soft: var(--app-success-soft);
+  --color-warning: var(--app-warning);
+  --color-warning-soft: var(--app-warning-soft);
+  --color-danger: var(--app-danger);
+  --color-danger-soft: var(--app-danger-soft);
+}
+
+:root {
+  --app-bg: #ffffff;
+  --app-surface: #ffffff;
+  --app-surface-2: #f4f5f7;
+  --app-fg: #0e1726;
+  --app-muted: #545e6e;
+  --app-subtle: #8a93a2;
+  --app-line: #e5e7eb;
+  --app-primary: #13294b;
+  --app-primary-fg: #ffffff;
+  --app-primary-soft: #e8eef7;
+  --app-success: #1f7a4d;
+  --app-success-soft: #e6f4ec;
+  --app-warning: #a15c07;
+  --app-warning-soft: #fdf3e2;
+  --app-danger: #c0362c;
+  --app-danger-soft: #fdecea;
+  color-scheme: light;
+}
+
+.dark {
+  --app-bg: #0b0f17;
+  --app-surface: #131924;
+  --app-surface-2: #1b2230;
+  --app-fg: #edf0f5;
+  --app-muted: #a4adbc;
+  --app-subtle: #6f7a8b;
+  --app-line: #252e3c;
+  --app-primary: #9bbcff;
+  --app-primary-fg: #0b1526;
+  --app-primary-soft: #1a2740;
+  --app-success: #5fd19a;
+  --app-success-soft: #12291f;
+  --app-warning: #f3b75a;
+  --app-warning-soft: #2c2213;
+  --app-danger: #ff8a80;
+  --app-danger-soft: #331816;
+  color-scheme: dark;
+}
+
+@utility pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    background: var(--app-bg);
+  }
+  body {
+    min-height: 100dvh;
+    background: var(--app-bg);
+    color: var(--app-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  /* 16px+ inputs stop iOS Safari from zooming in on focus. */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+  button {
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+  button:disabled {
+    cursor: default;
+  }
+  :focus-visible {
+    outline: 2px solid var(--app-primary);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}
